@@ -33,7 +33,6 @@ const winlines: number[][] = [
 ];
 
 function makeMove(i: number) {
-    debugger;
     // Validate input
     if (gameState.winstatus !== "playing") return gameState;
     else if (gameState.board[i] !== null) return gameState;
