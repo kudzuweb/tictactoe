@@ -1,7 +1,9 @@
 import express from 'express';
 import ViteExpress from 'vite-express';
 import { makeMove } from './src/game.ts';
+import axios from 'axios';
 
+const baseUrl = 'http://localhost:3000'
 
 const getAll =() => {
     const request = axios.get(baseUrl)

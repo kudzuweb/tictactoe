@@ -3,6 +3,7 @@ import { useState } from 'react'
 import type { Mark, Player, Cell, Board, WinStatus, GameState } from './game.ts'
 import { makeMove, statusOf } from './game.ts'
 
+
 function Square({ value, onClick }: { value: Mark; onClick: () => void }) {
   return (
     <button
