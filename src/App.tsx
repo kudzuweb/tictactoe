@@ -1,6 +1,6 @@
 import { useState } from 'react'
 // import './App.css'
-import type { Mark, Player, Cell, Board, GameStatus } from './game.ts'
+import type { Mark, Player, Cell, Board, WinStatus, GameStatus } from './game.ts'
 import { statusOf} from './game.ts'
 
 function Square({ value, onClick }: { value: Mark; onClick: ()=> void }){

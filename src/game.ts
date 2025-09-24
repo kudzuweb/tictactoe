@@ -2,12 +2,14 @@ type Mark = 'X' | 'O' | null
 type Player = 'X' | 'O'
 type Cell = Player | null
 type Board = Cell[]; // length 9
-type GameStatus = "playing" | "won" | "draw"
+type WinStatus = "playing" | "won" | "draw"
 
-interface StatusResult {
-    status: GameStatus;
+
+interface GameStatus {
+    status: WinStatus;
+    board: Board;
     winner?: Player;
-    line?: number[];
+    winningline?: number[];
 }
 
 const winlines: number[][] = [
@@ -24,16 +26,16 @@ const winlines: number[][] = [
   [2, 4, 6],
 ];
 
-function statusOf(board: Board): StatusResult {
+function statusOf(board: Board): GameStatus {
     for (const [a, b, c] of winlines) {
         const first = board[a];
         if (first && board[b] === first && board[c] === first){
-            return{ status: "won", winner: first, line: [a, b, c]}
+            return{ status: "won", winner: first, winningline: [a, b, c]}
         }
     }
     if (!board.includes(null)) return {status: "draw"};
     return { status: 'playing'};
 }
 
-export type { Mark, Player, Cell, Board, GameStatus, StatusResult }
+export type { Mark, Player, Cell, Board, WinStatus, GameStatus }
 export { statusOf }
