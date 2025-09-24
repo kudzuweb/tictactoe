@@ -1,44 +1,52 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import type { Mark } from './game.tsx'
-import type { Cell } from './game.tsx'
-import type { Board } from './game.tsx'
-import type { GameStatus } from './game.tsx'
+// import './App.css'
+import type { Mark, Player, Cell, Board, GameStatus } from './game.ts'
+import { statusOf} from './game.ts'
 
-interface SquareProps {
-  onClick: () => void
-  value: Mark
-}
-
-function Square ({ onClick, value }: SquareProps) {
+function Square({ value, onClick }: { value: Mark; onClick: ()=> void }){
   return(
-    <button onClick={onClick} >{value}</button>
+    <button 
+    onClick={onClick}
+    className='w-full h-full aspect-square flex flex-wrap items-center justify-center border border-black'
+      >
+        {value ?? ''}
+      </button>
   )
 }
 
-interface BoardProps{
+const cells= Array.from({length:9}, (_, i) => i)
 
-}
+function BoardView(){
+  const [turn, setTurn] = useState<Player>('X')
+  const [board, setBoard] = useState<Mark[]>(Array(9).fill(null))
+  
+const result = statusOf(board);
+const gameOver = result.status !== 'playing';
 
-cells = [0,1,2,3,4,5,6,7,8]
+  function handleClick(i: number){
+    if (gameOver || board[i] !== null) return; 
+      const copy = [...board]
+      copy[i] = turn
 
-function Board(){
+      setBoard(copy)
+      setTurn(turn === 'X' ? 'O' : 'X')
+  }
+
   return(
-    <div className='grid grid-cols-3 gap 2'>
-      {cells.map(i => <Square key={i} />)}
-    </div>
+      <div className='grid grid-cols-3 gap-2'>
+        {cells.map(i => <Square key={i} value={board[i]} onClick={()=> handleClick(i)}/>)}
+      </div>
   );
 }
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <Board />
+      <h1 className= 'flex justify-center'>Tic Tac Toe</h1>
+      <div className='flex-lg h-7'>
+        <div>
+          <BoardView />
+        </div>
       </div>
     </>
   )
