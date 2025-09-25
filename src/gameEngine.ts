@@ -32,7 +32,7 @@ const winlines: number[][] = [
     [2, 4, 6],
 ];
 
-function makeMove(i: number) {
+function makeValidMove(i: number) {
     // Validate input
     if (gameState.winstatus !== "playing") return gameState;
     else if (gameState.board[i] !== null) return gameState;
@@ -76,4 +76,4 @@ function statusOf(gameState: GameState): GameState {
 }
 
 export type { Mark, Player, Cell, Board, WinStatus, GameState }
-export { statusOf, makeMove }
+export default { statusOf, makeValidMove }
