@@ -1,6 +1,6 @@
 // import './App.css'
 import { useState } from 'react'
-import type { Player, Cell, Board, GameStatus } from './game.tsx'
+import type { Player, Cell, Board, GameStatus } from './gameEngine.ts'
 
 function ReApp() {
   const [move, setMove] = useState(undefined)

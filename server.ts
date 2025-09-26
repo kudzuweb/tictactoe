@@ -1,9 +1,6 @@
 import express from 'express';
 import ViteExpress from 'vite-express';
-import { makeMove } from './src/game.ts';
-import axios from 'axios';
-
-const baseUrl = 'http://localhost:3000'
+import { makeMove } from './src/gameEngine.ts';
 
 const getAll =() => {
     const request = axios.get(baseUrl)
@@ -15,6 +12,14 @@ app.use(express.json());
 
 app.get('/message', (_, res) => res.send("Hello from express!"));
 
-app.get('/game', (req, res) => res.send(gameState))
+app.get('/api/games', (req, res) => 
+    const id = crypto.randomUUID()
+    games.set(id, { board: Array(9).fill(null), turn: 'X' })
+    res.status(201).json({ id })
+)
+
+app.get('/api/games/:id', (req, res) => res.json(loadGame(req.params.id)))
+
+app.post('/api/games/:id/moves', (req, res) => res.json(applyAndsave(req.body.index)))
 
 ViteExpress.listen(app, 3000, () => console.log("Server is listening..."))
