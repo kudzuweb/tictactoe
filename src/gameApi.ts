@@ -1,5 +1,7 @@
 import { api } from './api'
 
+const newGame = async () => (await api.post('/games')).data.id;
+
 export const getGame = async (id: string) => {
     const res = await api.get(`/games/${id}`)
     return res.data
@@ -10,4 +12,4 @@ export const postMove = async (id: string, index: number) => {
     return res.data
 }
 
-export default { getGame, postMove }
+export default { newGame, getGame, postMove }
